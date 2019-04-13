@@ -1,0 +1,28 @@
+<div class="login-wrapper">
+  <form class="login" ngNativeValidate (submit)="onSubmit()">
+    <section class="title">
+      <h3 class="welcome">Welcome to</h3>
+      Abang Online
+      <h5 class="hint">Use your Company ID to sign in</h5>
+    </section>
+    <div class="login-group">
+      <clr-input-container>
+        <input type="text" name="username" clrInput placeholder="Username" required maxlength="25"
+          [(ngModel)]="login.username" />
+      </clr-input-container>
+      <clr-password-container>
+        <input type="password" name="password" clrPassword placeholder="Password" required maxlength="25"
+          [(ngModel)]="login.password" />
+      </clr-password-container>
+      <div class="error active" *ngIf="message">
+        {{message}}
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="clicked">Login</button>
+    </div>
+  </form>
+</div>
+<div class="div-loader" *ngIf="clicked">
+  <span class="spinner spinner-inverse">
+    Loading...
+  </span>
+</div>

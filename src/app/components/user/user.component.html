@@ -1,0 +1,101 @@
+<h2>
+  <code class="language-html">List User</code>
+</h2>
+<hr />
+<p class="p2" align="right">
+  <button class="btn btn-primary" routerLink="../add-user">
+    <clr-icon shape="plus"></clr-icon> Tambah
+  </button>
+</p>
+<div class="container">
+  <clr-datagrid *ngIf="list_user" style="margin-bottom: 25px;">
+    <clr-dg-column [clrDgField]="'username'" [clrDgSortOrder]="descSort">Username</clr-dg-column>
+    <clr-dg-column [clrDgField]="'nama'" [clrDgSortOrder]="descSort" *ngIf="!f_mobile">Full Name</clr-dg-column>
+    <clr-dg-column>Actions</clr-dg-column>
+
+    <clr-dg-row *clrDgItems="let user of list_user">
+      <clr-dg-cell>{{user.username}}</clr-dg-cell>
+      <clr-dg-cell *ngIf="!f_mobile">{{user.nama}}</clr-dg-cell>
+      <clr-dg-cell class="mid">
+        <!-- <clr-icon class="is-solid cursor-pointer" shape="pencil" routerLink="../edit-user/{{user.username}}"></clr-icon> -->
+        &nbsp;
+        <clr-icon shape="eye" class="is-solid cursor-pointer" (click)="viewUser(user)"></clr-icon>
+      </clr-dg-cell>
+    </clr-dg-row>
+
+    <clr-dg-footer>
+      <clr-dg-pagination #pagination [clrDgPageSize]="10">
+        <clr-dg-page-size [clrPageSizeOptions]="[10,20,50,100]">Users per page</clr-dg-page-size>
+        {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
+        of {{pagination.totalItems}} users
+      </clr-dg-pagination>
+    </clr-dg-footer>
+  </clr-datagrid>
+</div>
+
+<span class="spinner spinner-inverse" *ngIf="!list_user">
+  Loading...
+</span>
+
+<clr-modal [(clrModalOpen)]="isModalVisible">
+  <h3 class="modal-title">User Detail </h3>
+  <div class="modal-body">
+    <table>
+      <tr valign="top">
+        <td>Username </td>
+        <td> : </td>
+        <td> {{user.username}}</td>
+      </tr>
+      <tr valign="top">
+        <td>Nama </td>
+        <td> : </td>
+        <td> {{user.nama}}</td>
+      </tr>
+      <tr valign="top">
+        <td>Jenis Kelamin </td>
+        <td> : </td>
+        <td> {{user.jenis_kelamin}}</td>
+      </tr>
+      <tr valign="top">
+        <td>Tanggal Lahir </td>
+        <td> : </td>
+        <td> {{user.tanggal_lahir}}</td>
+      </tr>
+      <tr valign="top">
+        <td>Email </td>
+        <td> : </td>
+        <td> {{user.email}}</td>
+      </tr>
+      <tr valign="top">
+        <td>No.HP </td>
+        <td> : </td>
+        <td> {{user.no_hp}}</td>
+      </tr>
+      <tr valign="top">
+        <td>Alamat </td>
+        <td> : </td>
+        <td> {{user.alamat}}</td>
+      </tr>
+      <tr valign="top">
+        <td>Status </td>
+        <td> : </td>
+        <td *ngIf="user.f_aktif_user == '1'"> Aktif</td>
+        <td *ngIf="user.f_aktif_user == '0'"> Tidak Aktif</td>
+      </tr>
+      <tr valign="top">
+        <td>Tipe User </td>
+        <td> : </td>
+        <td *ngIf="user.type_user == '1'"> Mitra</td>
+        <td *ngIf="user.type_user == '2'"> User</td>
+      </tr>
+      <tr valign="top" *ngIf="user.type_user == '1'">
+        <td>Kode Dagangan </td>
+        <td> : </td>
+        <td> {{user.kode_dagangan}}</td>
+      </tr>
+    </table>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="isModalVisible = false">Ok</button>
+  </div>
+</clr-modal>

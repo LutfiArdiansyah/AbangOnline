@@ -1,0 +1,86 @@
+<h2>
+  <code class="language-html">Add User</code>
+</h2>
+<hr />
+<div class="alert alert-success" role="alert" *ngIf="message == 'Register Berhasil'">
+  <div class="alert-items">
+    <div class="alert-item static">
+      <div class="alert-icon-wrapper">
+        <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+      </div>
+      <span class="alert-text">{{message}}</span>
+    </div>
+  </div>
+</div>
+<div class="alert alert-danger" role="alert" *ngIf="message && message != 'Register Berhasil'">
+  <div class="alert-items">
+    <div class="alert-item static">
+      <div class="alert-icon-wrapper">
+        <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+      </div>
+      <span class="alert-text">{{message}}</span>
+    </div>
+  </div>
+</div>
+<div class="clr-row" style="margin-bottom: 25px;">
+  <div class="clr-col-md-12">
+    <div class="clr-col-md-4">
+      <form clrForm ngNativeValidate (submit)="onSubmit()">
+        <clr-input-container>
+          <label class="clr-col-md-4">Username</label>
+          <input class="clr-col-md-8" clrInput type="text" name="username" required maxlength="25" minlength="6"
+            [(ngModel)]="user.username" />
+        </clr-input-container>
+        <clr-input-container>
+          <label class="clr-col-md-4">Nama</label>
+          <input class="clr-col-md-8" clrInput type="text" name="nama" required maxlength="25" minlength="3"
+            [(ngModel)]="user.nama" />
+        </clr-input-container>
+        <clr-select-container>
+          <label class="clr-col-md-4">Jenis Kelamin</label>
+          <select class="clr-col-md-8" clrSelect name="jenis_kelamin" required [(ngModel)]="user.jenis_kelamin">
+            <option value="">-- SILAHKAN PILIH --</option>
+            <option value="Laki-laki">Laki-laki</option>
+            <option value="Perempuan">Perempuan</option>
+          </select>
+        </clr-select-container>
+        <clr-password-container>
+          <label class="clr-col-md-4">Password</label>
+          <input class="clr-col-md-8" clrPassword type="password" name="password" required maxlength="25" minlength="8"
+            [(ngModel)]="user.password" />
+        </clr-password-container>
+        <clr-input-container>
+          <label class="clr-col-md-4">No.HP</label>
+          <input class="clr-col-md-8" clrInput type="number" name="no_hp" required maxlength="14" minlength="11"
+            [(ngModel)]="user.no_hp" />
+        </clr-input-container>
+        <clr-textarea-container>
+          <label class="clr-col-md-4">Alamat</label>
+          <textarea class="clr-col-md-8" clrTextarea name="alamat" required maxlength="255"
+            [(ngModel)]="user.alamat"></textarea>
+        </clr-textarea-container>
+        <clr-select-container>
+          <label class="clr-col-md-4">Tipe User</label>
+          <select class="clr-col-md-8" clrSelect name="type_user" required [(ngModel)]="user.userAs">
+            <option value="">-- SILAHKAN PILIH --</option>
+            <option value="1">Mitra</option>
+            <option value="2">User</option>
+          </select>
+        </clr-select-container>
+        <clr-select-container *ngIf="user.userAs == '1'">
+          <label class="clr-col-md-4">Kategori Penjualan</label>
+          <select class="clr-col-md-8" clrSelect name="kode_dagangan" required [(ngModel)]="user.kode_dagangan">
+            <option value="">-- SILAHKAN PILIH --</option>
+            <option *ngFor="let dagangan of list_dagangan" [value]="dagangan.kode_dagangan">{{dagangan.nama_dagangan}}
+            </option>
+          </select>
+        </clr-select-container>
+        <br />
+        <p align="right">
+          <button type="submit" class="btn btn-primary" [disabled]="clicked">Submit</button>
+          <button type="reset" class="btn btn-outline">Reset</button>
+        </p>
+      </form>
+    </div>
+  </div>
+</div>
