@@ -4,8 +4,8 @@
   "theme_color": "#06ce00",
   "background_color": "#06ce00",
   "display": "standalone",
-  "scope": "/AbangOnline/",
-  "start_url": "/AbangOnline/",
+  "scope": "/",
+  "start_url": "/",
   "icons": [
     {
       "src": "assets/icons/icon-72x72.png",
